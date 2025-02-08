@@ -154,22 +154,21 @@
                 <if variable="page">
                   <group prefix=" – ">
                     <choose>
-                      <if type="article" language="ru">
+                      <if locale="ru-RU">
                         <text variable="page" prefix="С. " suffix="."/>
                       </if>
-                      <else-if type="article">
-                        <text variable="page" prefix="P. " suffix="."/>
-                      </else-if>
                       <else>
-                        <text variable="page" prefix="С. " suffix="."/>
+                        <text variable="page" prefix="P. " suffix="."/>
                       </else>
                     </choose>
                   </group>
                 </if>
               </choose>
-              <if variable="DOI">
-                <text variable="DOI" prefix=" – doi: " suffix="."/>
-              </if>
+              <choose>
+                <if variable="DOI">
+                  <text variable="DOI" prefix=" – doi: " suffix="."/>
+                </if>
+              </choose>
             </group>
           </group>
         </else-if>
