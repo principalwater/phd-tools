@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="ru-RU">
   <info>
-    <title>Russian GOST R 7.0.5-2008 v2 (numeric, sorted alphabetically, Ру́сский)</title>
-    <title-short>GOST R 7.0.5-2008 v2 (numeric, sorted alphabetically)</title-short>
+    <title>Russian GOST R 7.0.5-2008 (numeric, sorted alphabetically, Ру́сский)</title>
+    <title-short>GOST R 7.0.5-2008 (numeric, sorted alphabetically)</title-short>
     <id>http://www.zotero.org/styles/gost-r-7-0-5-2008-numeric-alphabetical</id>
     <link href="http://www.zotero.org/styles/gost-r-7-0-5-2008-numeric-alphabetical" rel="self"/>
     <link href="http://protect.gost.ru/document.aspx?control=7&amp;id=173511" rel="documentation"/>
@@ -17,18 +17,30 @@
     <category citation-format="numeric"/>
     <category field="generic-base"/>
     <summary>Russian GOST-2008 style. Book, report, webpage, post-weblog and article chapters edited. Note!!! In articles form of № = Issue (Volume).</summary>
-    <updated>2025-02-09T01:00:00+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+    <updated>2025-02-09T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">
+      This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License
+    </rights>
   </info>
   <locale xml:lang="ru">
     <terms>
       <term name="et-al"> [и др.].</term>
       <term name="editor">под ред.</term>
       <term name="accessed">дата обращения</term>
-      <term name="page" form="short">с.</term>
+      <term name="page" form="short">С.</term>
       <term name="translator">перевод</term>
     </terms>
   </locale>
+  <locale xml:lang="en-US">
+    <terms>
+      <term name="page" form="short">P.</term>
+    </terms>
+  </locale>
+  <!-- Обновлённый макрос для вывода номера страницы с использованием локализованного термина -->
+  <macro name="page">
+    <text term="page" form="short" prefix=" – " suffix=" "/>
+    <text variable="page" suffix="."/>
+  </macro>
   <macro name="editor">
     <names variable="editor" delimiter=", " suffix=",">
       <label prefix=" " suffix=" "/>
@@ -111,6 +123,7 @@
       <text macro="citation-number"/>
       <text macro="author-first" suffix=" "/>
       <choose>
+        <!-- Для книг -->
         <if type="book" match="any">
           <group>
             <group delimiter=" ">
@@ -120,79 +133,80 @@
               <text macro="translator"/>
               <text variable="edition" suffix="-е изд.,"/>
             </group>
-            <text macro="publisher" prefix=" "/>
-            <text variable="number-of-pages" prefix=" " suffix=" c."/>
+            <text macro="publisher" prefix=" – "/>
+            <text variable="number-of-pages" prefix=" – " suffix=" c."/>
           </group>
         </if>
+        <!-- Для глав и материалов конференций -->
         <else-if type="chapter paper-conference" match="any">
           <group>
-            <group delimiter=" ">
+            <group>
               <text macro="title"/>
-              <text variable="collection-title" suffix=" /"/>
+              <text variable="collection-title" prefix=" // " suffix="."/>
               <text macro="editor"/>
             </group>
-            <text macro="publisher" prefix=" "/>
-            <text variable="page" prefix="C. " suffix="."/>
+            <text macro="publisher" prefix=" – "/>
+            <text macro="page"/>
           </group>
         </else-if>
+        <!-- Для веб-страниц -->
         <else-if type="webpage post-weblog" match="any">
-          <text macro="title"/>
-          <text variable="container-title" prefix=" // "/>
-          <text prefix=" " macro="access"/>
-        </else-if>
-        <else-if type="article-journal article-magazine article-newspaper broadcast interview manuscript personal_communication speech thesis" match="any">
-          <text macro="title"/>
-          <group prefix=" // " delimiter=". ">
-            <text variable="container-title" suffix="."/>
-            <group>
-              <text macro="year-date" prefix=" – " suffix="."/>
-              <group prefix=" – ">
-                <text variable="issue" prefix="№ "/>
-                <text variable="volume" prefix="(" suffix=")"/>
-              </group>
-              <choose>
-                <if variable="page">
-                  <group prefix=" – ">
-                    <choose>
-                      <if locale="ru-RU">
-                        <text variable="page" prefix="С. " suffix="."/>
-                      </if>
-                      <else>
-                        <text variable="page" prefix="P. " suffix="."/>
-                      </else>
-                    </choose>
-                  </group>
-                </if>
-              </choose>
-              <choose>
-                <if variable="DOI">
-                  <text variable="DOI" prefix=" – doi: " suffix="."/>
-                </if>
-              </choose>
-            </group>
-          </group>
-        </else-if>
-        <else-if type="report">
-          <group suffix=".">
-            <text variable="publisher" suffix=". "/>
+          <group>
             <text macro="title"/>
+            <text variable="container-title" prefix=" // " suffix="."/>
+            <text macro="access" prefix=" – "/>
           </group>
-          <text variable="publisher-place" prefix=" " suffix=","/>
-          <text macro="year-date" prefix=" "/>
         </else-if>
-        <else>
-          <text macro="title" prefix=" "/>
-          <group delimiter=". " prefix=" " suffix=".">
-            <group prefix="// " delimiter=". ">
-              <text variable="container-title"/>
-              <text macro="year-date"/>
-              <text variable="volume" prefix="Т. "/>
-              <text variable="issue" prefix="№ "/>
+        <!-- Для журнальных статей и пр. -->
+        <else-if type="article-journal article-magazine article-newspaper broadcast interview manuscript personal_communication speech thesis" match="any">
+          <group>
+            <text macro="title"/>
+            <group>
+              <text variable="container-title" prefix=" // " suffix="."/>
+              <text macro="year-date" prefix=" – " suffix="."/>
+              <group suffix=".">
+                <text variable="issue" prefix=" – № "/>
+                <text variable="volume" prefix=" (" suffix=")"/>
+              </group>
+              <text macro="page"/>
             </group>
-            <text variable="page" prefix="C. " suffix="."/>
+          </group>
+        </else-if>
+        <!-- Для отчетов -->
+        <else-if type="report" match="any">
+          <group>
+            <text macro="title"/>
+            <group prefix=" – ">
+              <text variable="publisher-place" suffix=":"/>
+              <text macro="publisher" prefix=" "/>
+              <text macro="year-date" prefix=", " suffix="."/>
+            </group>
+          </group>
+        </else-if>
+        <!-- Общий случай -->
+        <else>
+          <group>
+            <text macro="title" prefix=" "/>
+            <group>
+              <group prefix=" // " suffix="." delimiter="">
+                <text variable="container-title"/>
+                <choose>
+                  <if variable="container-title">
+                    <text macro="year-date" prefix=" – " suffix="."/>
+                  </if>
+                  <else>
+                    <text macro="year-date" suffix="."/>
+                  </else>
+                </choose>
+                <text variable="volume" prefix=" – Т. "/>
+                <text variable="issue" prefix=" – № "/>
+              </group>
+              <text macro="page"/>
+            </group>
           </group>
         </else>
       </choose>
+      <text variable="DOI" prefix=" – doi: " suffix=""/>
     </layout>
   </bibliography>
 </style>
