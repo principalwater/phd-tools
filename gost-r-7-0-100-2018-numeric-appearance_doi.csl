@@ -199,7 +199,7 @@
     <names variable="author" suffix=". ">
       <!-- Добавить запятую между фамилией и инициалами автора: sort-separator=",&#160;", иначе sort-separator="&#160;" -->
       <!-- Сделать шрифт фамилий и инициалов авторов наклонным: font-style="italic", иначе font-style="normal" -->
-      <name et-al-min="2" et-al-use-first="1" suppress-min="4" initialize-with=".&#160;" name-as-sort-order="first" sort-separator=",&#160;"/>
+      <name et-al-min="2" et-al-use-first="1" suppress-min="4" initialize-with=".&#160;" name-as-sort-order="first" sort-separator="&#160;"/>
       <et-al term="and others"/>
     </names>
     <text variable="title"/>
@@ -207,7 +207,7 @@
   <macro name="second-position-creators">
 	  <names variable="author collection-editor editor translator" delimiter="; ">
       <label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-      <name et-al-min="5" et-al-use-first="3" sort-separator=",&#160;" delimiter=", " initialize-with=".&#160;"/>
+      <name et-al-min="5" et-al-use-first="3" sort-separator="&#160;" delimiter=", " initialize-with=".&#160;"/>
 	  </names>      
   </macro>
   <macro name="second-position-authors-only">
@@ -229,9 +229,9 @@
     _______________________________________________________________________________ -->
 
   <macro name="citation-number">
-    <!-- Для использования знака табуляции - расскомментить 1 строку ниже и закомментить строку под ней. -->
-    <!-- <text variable="citation-number" suffix=".&#9;"/> -->
-    <text variable="citation-number" suffix=". "/>
+    <!-- Для использования знака табуляции - расскомментировать 1 строку ниже и закомментить строку под ней. -->
+    <text variable="citation-number" suffix=".&#9;"/>
+    <!-- <text variable="citation-number" suffix=". "/> -->
   </macro>
   <macro name="publisher">
     <group delimiter=" : " prefix=" " suffix=", ">
@@ -295,8 +295,8 @@
   </macro>
   <macro name="URL">
     <group delimiter=" ">
-      <text term="available at" form="short" suffix=":"/>
-      <text variable="URL"/>
+      <text term="available at" form="short" suffix=": "/>
+      <text variable="URL" form="uri"/> <!-- Добавлен атрибут form="uri", чтобы отображать кликабельную ссылку -->
       <choose>
         <if variable="accessed">
           <group delimiter=" " prefix="(" suffix=")">
@@ -504,7 +504,7 @@
           <text variable="title-short"/>
           <text variable="issue" prefix="№&#160;"/>
           <text macro="page"/>
-           <text macro="DOI"/>
+           <text macro="DOI"/> <!-- Здесь будет выводиться doi с гиперссылкой -->
           <choose>
             <if variable="accessed">
               <text macro="URL"/>
