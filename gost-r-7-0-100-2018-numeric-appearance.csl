@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
   <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>gost-r-7-0-100-2018-numeric-appearance-doi</title>
+    <title>gost-r-7-0-100-2018-numeric-appearance</title>
     <id>https://bibliostyle.ru/style-russian-gost-r-7-0-100-2018-numeric-appearance-csl/</id>
     <link href="https://bibliostyle.ru/style-russian-gost-r-7-0-100-2018-numeric-appearance-csl/" rel="self"/>
     <link href="http://protect.gost.ru/document.aspx?control=7&amp;id=173511" rel="documentation"/>
@@ -11,10 +11,6 @@
 
       <uri/>
     </author>
-    <contributor>
-      <name>Vladislav Kuzmin</name>
-      <uri>https://github.com/principalwater</uri>
-    </contributor>
     <category citation-format="numeric"/>
     <category field="generic-base"/>
     <summary>
@@ -75,7 +71,7 @@
 
 
     </summary>
-    <updated>2025-02-09T11:16:18+03:00</updated>
+    <updated>2023-10-30T19:14:18+00:00</updated>
     <rights>This work is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License  http://creativecommons.org/licenses/by-sa/3.0/</rights>
   </info>
 <!--_______________________________________________________________________________
@@ -229,9 +225,7 @@
     _______________________________________________________________________________ -->
 
   <macro name="citation-number">
-    <!-- Для использования знака табуляции - расскомментить 1 строку ниже и закомментить строку под ней. -->
-    <!-- <text variable="citation-number" suffix=".&#9;"/> -->
-    <text variable="citation-number" suffix=". "/>
+    <text variable="citation-number" suffix=".&#9;"/>
   </macro>
   <macro name="publisher">
     <group delimiter=" : " prefix=" " suffix=", ">
@@ -310,14 +304,6 @@
         </if>
       </choose>
     </group>
-  </macro>
-  <macro name="DOI">
-    <group delimiter=" ">
-      <text variable="DOI" prefix="DOI "/>
-    </group>
-  </macro>
-  <macro name="DOI">
-    <text variable="DOI" prefix="DOI "/>
   </macro>
   <macro name="online">
     <choose>
@@ -504,7 +490,6 @@
           <text variable="title-short"/>
           <text variable="issue" prefix="№&#160;"/>
           <text macro="page"/>
-           <text macro="DOI"/>
           <choose>
             <if variable="accessed">
               <text macro="URL"/>
@@ -603,11 +588,11 @@
   <bibliography et-al-min="5" et-al-use-first="3">
     <sort>
       <!-- Строка для сортировки в порядке появления ссылок, а не в алфавитном.-->
-      <!-- <key variable="citation-number"/> -->
+      <key variable="citation-number"/>
 	  <!-- Сортировка по полю "Language" (сначала русскоязычные источники, затем иностранные. Чтобы задействовать алфавитную сортировку, строку выше нужно закомментировать, а следующие три раскомментировать-->
-      <key macro="language-sort" sort="descending"/>
+      <!-- <key macro="language-sort"/> 
       <key macro="author-title"/>
-      <key variable="issued"/>
+      <key variable="issued"/> -->
     </sort>
     <layout locale="en" suffix=".">
       <text macro="bibliography"/>
