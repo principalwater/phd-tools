@@ -1,0 +1,341 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+  <info>
+    <title>gost-r-7-0-100-2018-phd-style</title>
+    <id>gost-r-7-0-100-2018-phd-style-id/</id>
+    <link href="https://bibliostyle.ru/style-russian-gost-r-7-0-100-2018-numeric-appearance-csl/" rel="self"/>
+    <link href="http://protect.gost.ru/document.aspx?control=7&amp;id=173511" rel="documentation"/>
+    <author>
+      <name>Roman Raspopov, Рычков В.А., bibliostyle.ru</name>
+      <uri/>
+    </author>
+    <contributor>
+      <name>Vladislav Kuzmin</name>
+      <uri>https://github.com/principalwater</uri>
+    </contributor>
+    <category citation-format="numeric"/>
+    <category field="generic-base"/>
+    <summary>
+      ГОСТ Р 7.0.100-2018, полный библиографический вывод в цитировании, без "Текст: электронный", корректные сокращения и обозначения страниц для английских и русских источников.
+    </summary>
+    <updated>2025-07-13T21:45:00+03:00</updated>
+    <rights>This work is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License  http://creativecommons.org/licenses/by-sa/3.0/</rights>
+  </info>
+
+  <locale xml:lang="ru">
+    <terms>
+      <term name="et-al"> [и др.]</term>
+      <term name="editor" form="short">ред.</term>
+      <term name="collection-editor" form="short">сост.</term>
+      <term name="translator" form="short">пер.</term>
+      <term name="page" form="short">С.</term>
+      <term name="volume" form="short">Т.</term>
+      <term name="issue" form="short">№</term>
+      <term name="number-of-pages" form="short">с.</term>
+      <term name="available at">URL</term>
+      <term name="accessed">дата обращения</term>
+      <term name="in">В</term>
+      <term name="page-range-delimiter">–</term>
+      <term name="section" form="short">разд.</term>
+      <term name="chapter" form="short">гл.</term>
+      <term name="and"> </term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="en">
+    <terms>
+      <term name="et-al"> et al.</term>
+      <term name="editor" form="short">ed.</term>
+      <term name="collection-editor" form="short">comp.</term>
+      <term name="translator" form="short">trans.</term>
+      <term name="page" form="short">P.</term>
+      <term name="volume" form="short">Vol.</term>
+      <term name="issue" form="short">No.</term>
+      <term name="number-of-pages" form="short">p.</term>
+      <term name="available at">URL</term>
+      <term name="accessed">date of access</term>
+      <term name="in">In</term>
+      <term name="page-range-delimiter">–</term>
+      <term name="section" form="short">sec.</term>
+      <term name="chapter" form="short">ch.</term>
+      <term name="and"/>
+    </terms>
+  </locale>
+
+  <macro name="author">
+    <choose>
+      <if locale="en">
+        <names variable="author" delimiter=", " and="text" delimiter-precedes-last="never" delimiter-precedes-et-al="never">
+          <name et-al-min="4" et-al-use-first="3" et-al-use-last="false" delimiter-precedes-et-al="never" initialize-with=". " name-as-sort-order="all" sort-separator=" ">
+            <name-part name="family"/>
+            <name-part name="given"/>
+          </name>
+          <et-al term="et-al" prefix=" "/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="translator"/>
+            <text macro="title"/>
+          </substitute>
+        </names>
+      </if>
+      <else>
+        <names variable="author" delimiter=", " and="text" delimiter-precedes-last="never" delimiter-precedes-et-al="never">
+          <name et-al-min="4" et-al-use-first="3" et-al-use-last="false" delimiter-precedes-et-al="never" initialize-with=".&#160;" name-as-sort-order="all" sort-separator="&#160;">
+            <name-part name="family"/>
+            <name-part name="given"/>
+          </name>
+          <et-al term="et-al" prefix=" "/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="translator"/>
+            <text macro="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="author-short">
+    <names variable="author" delimiter=", " and="never" delimiter-precedes-last="never" delimiter-precedes-et-al="never">
+      <name form="short" name-as-sort-order="all" initialize-with=". " />
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+        <text macro="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+
+  <macro name="responsibility">
+    <names variable="author" delimiter=", ">
+      <name and="text" initialize-with=". "/>
+    </names>
+  </macro>
+
+  <macro name="container-responsibility">
+    <names variable="editor" delimiter=", ">
+      <label form="short" suffix=" "/>
+      <name and="text" initialize-with=". "/>
+      <et-al term="et-al" prefix=" "/>
+    </names>
+  </macro>
+
+  <macro name="publisher">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+
+  <macro name="year-date">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="pages">
+    <group>
+      <label variable="page" form="short" suffix=" "/>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <macro name="number-of-pages">
+    <group>
+      <text variable="number-of-pages"/>
+      <label variable="number-of-pages" form="short" prefix=" "/>
+    </group>
+  </macro>
+
+  <macro name="volume">
+    <group>
+      <label variable="volume" form="short" suffix=" "/>
+      <text variable="volume"/>
+    </group>
+  </macro>
+
+  <macro name="issue">
+    <group>
+      <label variable="issue" form="short" suffix=" "/>
+      <text variable="issue"/>
+    </group>
+  </macro>
+
+  <macro name="doi">
+    <text variable="DOI" prefix="DOI: "/>
+  </macro>
+
+  <macro name="url">
+    <group delimiter=" ">
+      <text term="available at" suffix=": "/>
+      <text variable="URL"/>
+      <choose>
+        <if variable="accessed">
+          <group prefix="(" suffix=")">
+            <text term="accessed" suffix=": "/>
+            <date variable="accessed">
+              <date-part name="day" form="numeric-leading-zeros" suffix="."/>
+              <date-part name="month" form="numeric-leading-zeros" suffix="."/>
+              <date-part name="year"/>
+            </date>
+          </group>
+        </if>
+      </choose>
+    </group>
+  </macro>
+
+  <macro name="author-title">
+    <names variable="author" delimiter=", " suffix=". ">
+      <name et-al-min="4" et-al-use-first="3" et-al-use-last="false" suppress-min="4" initialize-with=". " name-as-sort-order="first" sort-separator=" "/>
+      <et-al term="and others"/>
+    </names>
+    <text variable="title" prefix=" "/>
+  </macro>
+
+  <macro name="main">
+    <choose>
+      <if type="book">
+        <text macro="author" suffix=". "/>
+        <text macro="title"/>
+        <group prefix=" / ">
+          <text macro="responsibility"/>
+        </group>
+        <group prefix=". – ">
+          <text variable="edition" suffix=". – "/>
+          <group delimiter=", ">
+            <text macro="publisher"/>
+            <text macro="year-date"/>
+          </group>
+          <text prefix=". – " macro="number-of-pages"/>
+          <text prefix=". – " macro="doi"/>
+          <text prefix=". – " macro="url"/>
+        </group>
+      </if>
+      <else-if type="chapter paper-conference">
+        <text macro="author" suffix=". "/>
+        <text macro="title" suffix=" // "/>
+        <text term="in" suffix=": "/>
+        <text variable="container-title"/>
+        <group prefix=" / ">
+          <text macro="container-responsibility"/>
+        </group>
+        <group prefix=". – ">
+          <group delimiter=", ">
+            <text macro="publisher"/>
+            <text macro="year-date"/>
+          </group>
+          <text prefix=". – " macro="volume"/>
+          <text prefix=". – " macro="pages"/>
+          <text prefix=". – " macro="doi"/>
+          <text prefix=". – " macro="url"/>
+        </group>
+      </else-if>
+      <else-if type="article-journal article-magazine">
+        <text macro="author" suffix=". "/>
+        <text macro="title" suffix=" // "/>
+        <text variable="container-title"/>
+        <group prefix=". – ">
+          <text macro="year-date"/>
+          <text prefix=". – " macro="volume"/>
+          <text prefix=". – " macro="issue"/>
+          <text prefix=". – " macro="pages"/>
+          <text prefix=". – " macro="doi"/>
+          <text prefix=". – " macro="url"/>
+        </group>
+      </else-if>
+      <else-if type="thesis">
+        <text macro="author" suffix=". "/>
+        <text macro="title" suffix=": "/>
+        <text variable="genre" suffix=" / "/>
+        <text macro="responsibility" suffix="; "/>
+        <text variable="publisher"/>
+        <group prefix=". – ">
+          <text variable="publisher-place" suffix=", "/>
+          <text macro="year-date"/>
+          <text prefix=". – " macro="number-of-pages"/>
+        </group>
+      </else-if>
+      <else-if type="report">
+        <choose>
+          <if variable="author">
+            <text macro="author" suffix=". "/>
+            <text macro="title"/>
+            <group prefix=" / ">
+              <text variable="institution"/>
+            </group>
+          </if>
+          <else>
+            <text macro="title"/>
+          </else>
+        </choose>
+        <group prefix=". – ">
+           <group delimiter=", ">
+            <text macro="publisher"/>
+            <text macro="year-date"/>
+          </group>
+          <text prefix=". – " macro="number-of-pages"/>
+          <text prefix=". – " macro="url"/>
+        </group>
+      </else-if>
+      <else-if type="webpage">
+        <choose>
+          <if variable="author">
+            <text macro="author" suffix=". "/>
+          </if>
+        </choose>
+        <text macro="title" suffix=" // "/>
+        <text variable="container-title"/>
+        <group prefix=". – ">
+          <text macro="url"/>
+        </group>
+      </else-if>
+      <else-if type="legal_case bill document" match="any">
+        <text macro="title"/>
+        <group prefix=". – ">
+          <text macro="url"/>
+        </group>
+      </else-if>
+      <else>
+        <text macro="author" suffix=". "/>
+        <text macro="title"/>
+        <group prefix=" / ">
+          <text macro="responsibility"/>
+        </group>
+        <group prefix=". – ">
+          <text variable="edition" suffix=". – "/>
+          <group delimiter=", ">
+            <text macro="publisher"/>
+            <text macro="year-date"/>
+          </group>
+          <text prefix=". – " macro="number-of-pages"/>
+          <text prefix=". – " macro="doi"/>
+          <text prefix=". – " macro="url"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  
+  <citation et-al-min="4" et-al-use-first="3">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout delimiter="\n">
+      <text macro="main"/>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true" et-al-min="4" et-al-use-first="3" entry-spacing="0" line-spacing="1.5">
+    <sort>
+      <key macro="author-short"/>
+      <key variable="issued"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=".&#09;"/>
+      <text macro="main"/>
+    </layout>
+  </bibliography>
+</style>

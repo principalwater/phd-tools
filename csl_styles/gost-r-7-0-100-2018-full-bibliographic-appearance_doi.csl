@@ -24,7 +24,7 @@
   <!-- Локализация -->
   <locale xml:lang="en">
     <terms>
-      <term name="et-al">et al.</term>
+      <term name="et-al"> [и др.]</term>
       <term name="and others"/>
       <term name="page" form="short">p.</term>
       <term name="page-range" form="short">pp.</term>
@@ -45,7 +45,7 @@
   </locale>
   <locale xml:lang="ru">
     <terms>
-      <term name="et-al">[и др.]</term>
+      <term name="et-al"> [и др.]</term>
       <term name="and others"/>
       <term name="page" form="short">p.</term>
       <term name="page-range" form="short">pp.</term>
@@ -98,16 +98,6 @@
       </else>
     </choose>
   </macro>
-  <macro name="language-sort">
-    <choose>
-      <if variable="language">
-        <text variable="language"/>
-      </if>
-      <else>
-        <text value="AA00"/>
-      </else>
-    </choose>
-  </macro>
   <macro name="author-title">
     <choose>
       <if variable="author" et-al-min="4">
@@ -115,14 +105,15 @@
         <text variable="title"/>
         <text value=" / " suffix=""/>
         <names variable="author" et-al-min="5" et-al-use-first="3" delimiter=", " suffix=". ">
-          <name initialize-with=". " name-as-sort-order="first"/>
+          <name initialize-with=". " name-as-sort-order="first" delimiter-precedes-et-al="never"/>
           <et-al/>
         </names>
       </if>
       <else>
         <!-- Меньше 4 авторов: имена сначала -->
         <names variable="author" suffix=". ">
-          <name initialize-with=". " name-as-sort-order="first" delimiter=", "/>
+          <name initialize-with=". " name-as-sort-order="first" delimiter=", " delimiter-precedes-et-al="never"/>
+          <et-al/>
         </names>
         <text variable="title"/>
       </else>
@@ -131,7 +122,7 @@
   <macro name="second-position-creators">
     <names variable="author collection-editor editor translator" delimiter="; ">
       <label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-      <name et-al-min="5" et-al-use-first="3" sort-separator=" " delimiter=", " initialize-with=". "/>
+      <name et-al-min="5" et-al-use-first="3" sort-separator=" " delimiter=", " initialize-with=". " delimiter-precedes-et-al="never"/>
       <et-al term="et-al"/>
     </names>
   </macro>
@@ -145,7 +136,7 @@
   <macro name="second-position-creators-no-authors">
     <names variable="collection-editor editor translator" delimiter="; ">
       <label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-      <name et-al-min="3" et-al-use-first="1" sort-separator=", " delimiter=", " initialize-with=". "/>
+      <name et-al-min="3" et-al-use-first="1" sort-separator=", " delimiter=", " initialize-with=". " delimiter-precedes-et-al="never"/>
       <et-al term="et-al"/>
     </names>
   </macro>
@@ -631,8 +622,6 @@
   <!-- Секция БИБЛИОГРАФИИ с сортировкой по языку (ru→en) и номеру, 1.5-line spacing, 0pt after -->
   <bibliography et-al-min="5" et-al-use-first="3">
     <sort>
-      <!-- Сначала по языку: ru (AA..) выше en (BB..), затем по автор-title (алфавит) -->
-      <key macro="language-sort" sort="descending"/>
       <key macro="author-title"/>
     </sort>
     <layout suffix="." line-height="1.5" margin-after="0pt">
